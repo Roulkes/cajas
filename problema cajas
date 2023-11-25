@@ -1,0 +1,48 @@
+# Dimensión de 10 cajas (longitud, ancho, altura)
+Dim = [
+    [3, 7, 1],
+    [1, 1, 4],
+    [6, 3, 4],
+    [2, 6, 3],
+    [1, 9, 3],
+    [8, 4, 4],
+    [7, 5, 3],
+    [2, 9, 1],
+    [4, 8, 7],
+    [7, 2, 9]
+]
+
+# Se calculan áreas de cada caja
+Función calculaAreas(Dim):
+    Areas = {}
+    alturas = []
+    Para cada i en el rango de 0 a longitud(Dim) - 1:
+        A1 = Dim[i][0] * Dim[i][1]
+        A2 = Dim[i][1] * Dim[i][2]
+        A3 = Dim[i][2] * Dim[i][0]
+        Areas[i] = [A1, A2, A3]  # Se almacena aquí
+        alturas.append([Dim[i][2], Dim[i][0], Dim[i][1]])  # Almacena alturas de las cajas
+    Devolver Areas, alturas  # Devuelve áreas y alturas
+
+# Se ordenan áreas de manera descendente
+Función ordenaAreas(Areas, alturas):
+    orden = []
+    Para cada i en el rango de 0 a 9:
+        Caja = 0  # Se va a almacenar el índice de la caja con área mayor
+        Valor = 0  # Valor del área más grande
+        altura = 0  # Altura de la caja con área mayor
+        Para cada j en el rango de 0 a 9:
+            Para cada k en el rango de 0 a longitud(Areas[j]) - 1:
+                Si Areas[j][k] > Valor:
+                    Caja = j
+                    Valor = Areas[j][k]
+                    altura = alturas[j][k]
+        orden.append([Valor, Caja, altura])  # Se agrega la información aquí (valor, caja, altura)
+        Areas[Caja].remove(Valor)  # Se elimina área más grande
+    Devolver orden
+
+# Llamada a las funciones
+Areas, alturas = calculaAreas(Dim)
+orden = ordenaAreas(Areas, alturas)
+
+Imprimir(orden)
